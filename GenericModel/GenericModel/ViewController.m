@@ -51,7 +51,10 @@
                                  @"hobby": @"Basketball",
                                  @"age"  : @(25)};
     
-    StudentModel *studentModel = [GenericModel getObjectByDictionary:studentDic clazz:[StudentModel class]];
+    StudentModel *studentModel = [GenericModel
+                                  getObjectByDictionary:studentDic
+                                  clazz:[StudentModel class]];
+    
     NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel.hobby, (long)studentModel.age);
 }
 
@@ -177,8 +180,13 @@
                                  @"age"  : @(25),
                                  @"birthName" : @"birthName1"};
     
-    SubStudentModel *subStudentModel = [GenericModel getObjectByDictionary:subStudentDic clazz:[SubStudentModel class]];
-    NSLog(@"studentModel:name:%@, hobby:%@, age:%ld , birthName:%@",subStudentModel.name, subStudentModel.hobby, (long)subStudentModel.age, subStudentModel.birthName);
+    SubStudentModel *subStudentModel = [GenericModel getObjectByDictionary:subStudentDic
+                                                                     clazz:[SubStudentModel class]];
+    NSLog(@"studentModel:name:%@, hobby:%@, age:%ld , birthName:%@",
+          subStudentModel.name,
+          subStudentModel.hobby,
+          (long)subStudentModel.age,
+          subStudentModel.birthName);
 }
 
 
