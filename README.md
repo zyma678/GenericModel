@@ -9,8 +9,8 @@ Objective-C Model和JSON互相转换的简单高效框架
  
 ## Example
 
-* `NSDictionary -> Model`
-```
+#### `NSDictionary -> Model`
+```objc
 //StudentModel.h
 
 @protocol StudentModel @end
@@ -22,7 +22,7 @@ Objective-C Model和JSON互相转换的简单高效框架
 
 @end
 ```
-```
+```objc
 //Example Code 
 
 NSDictionary *studentDic = @{
@@ -35,7 +35,7 @@ StudentModel *studentModel = [GenericModel
                               clazz:[StudentModel class]];
 ```
 
-```
+```objc
 //Output
 
 studentDic:{
