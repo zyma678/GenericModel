@@ -11,6 +11,9 @@ Objective-C Model和JSON互相转换的简单高效框架
 
 * `NSDictionary -> Model`
 ```
+
+/****************** StudentModel.h ***************/
+
 @protocol StudentModel @end
 @interface StudentModel : GenericModel
 
@@ -22,10 +25,26 @@ Objective-C Model和JSON互相转换的简单高效框架
 
 /***********************************************/
 
-    NSDictionary *studentDic = @{
-                                 @"name" : @"Name1",
-                                 @"hobby": @"Basketball",
-                                 @"age"  : @(25)};
-    
-    StudentModel *studentModel = [GenericModel getObjectByDictionary:studentDic clazz:[StudentModel class]];
+/***************** Example Code ****************/
+
+NSDictionary *studentDic = @{
+                             @"name" : @"Name1",
+                             @"hobby": @"Basketball",
+                             @"age"  : @(25)};
+ 
+StudentModel *studentModel = [GenericModel
+                              getObjectByDictionary:studentDic
+                              clazz:[StudentModel class]];
+                              
+/***********************************************/
+
+/****************   Output    *******************/
+
+studentDic:{
+    age = 13;
+    hobby = Football;
+    name = Name2;
+}
+
+/***********************************************/
 ```
