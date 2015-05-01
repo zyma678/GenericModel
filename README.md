@@ -10,7 +10,7 @@ Objective-C Model、JSON、NSDictionary互相转换简单高效的轻量级框�
 ## Example
 
 ### JSON -> Model
-### JSON类型转换简单Model
+### JSON类型转简单Model
 ```objc
 //StudentModel.h
 @protocol StudentModel @end
