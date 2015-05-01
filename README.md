@@ -218,7 +218,7 @@ subStudentDic:{
 }
 ```
 
-### NSDictionary --> ((model extended by other model)
+### NSDictionary --> (model extended by other model)
 ### 字典转化成继承与其他model的model
 ```objc
 //Example Code 
