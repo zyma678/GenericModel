@@ -9,8 +9,8 @@ Objective-C Model、JSON、NSDictionary互相转换简单高效的轻量级框�
  
 ## Example
 
-### NSDictionary -> Model
-### 字典类型转换简单Model
+### JSON -> Model
+### JSON类型转换简单Model
 ```objc
 //StudentModel.h
 @protocol StudentModel @end
@@ -22,6 +22,43 @@ Objective-C Model、JSON、NSDictionary互相转换简单高效的轻量级框�
 
 @end
 ```
+```objc
+//Example Code 
+NSString *jsonString = @"{\"name\":\"Name1\", \"hobby\":\"Basketball\", \"age\":14}";
+StudentModel *studentModel = [GenericModel getObjectByJSON:jsonString clazz:[StudentModel class]];
+NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel.hobby, (long)studentModel.age);
+```
+```objc
+//Output
+2015-05-01 18:43:07.998 GenericModel[16634:359368] studentModel:name:Name1, hobby:Basketball, age:14
+````
+### Model --> JSON
+### 简单Model转JSON类型
+```objc
+StudentModel *student_1 = [[StudentModel alloc] init];
+student_1.name = @"student_1";
+student_1.hobby = @"BasketBall";
+student_1.age = 15;
+    
+StudentModel *student_2 = [[StudentModel alloc] init];
+student_2.name = @"student_2";
+student_2.hobby = @"Football";
+student_2.age = 14;
+    
+GradeModel *gradeMode = [[GradeModel alloc] init];
+[gradeMode.students addObject:student_1];
+[gradeMode.students addObject:student_2];
+    
+NSString *resultJSON = [GenericModel getJSONByObject:gradeMode];
+NSLog(@"resultJSON:%@",resultJSON);
+````
+```objc
+//Output
+resultJSON:{"students":[{"name":"student_1","hobby":"BasketBall","age":15},{"name":"student_2","hobby":"Football","age":14}]}
+````
+
+### NSDictionary -> Model
+### 字典类型转换简单Model
 ```objc
 //Example Code 
 NSDictionary *studentDic = @{
