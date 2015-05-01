@@ -10,6 +10,7 @@ Objective-C Model和JSON互相转换的简单高效框架
 ## Example
 
 ### NSDictionary -> Model
+### 字典类型转换简单Model
 ```objc
 //StudentModel.h
 
@@ -33,6 +34,8 @@ NSDictionary *studentDic = @{
 StudentModel *studentModel = [GenericModel
                               getObjectByDictionary:studentDic
                               clazz:[StudentModel class]];
+                              
+NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel.hobby, (long)studentModel.age);
 ```
 ```objc
 //Output
@@ -41,5 +44,32 @@ studentDic:{
     age = 13;
     hobby = Football;
     name = Name2;
+}
+```
+### Model -> NSDictionary
+### 简单Model转换成字典
+```objc
+ StudentModel *student = [[StudentModel alloc] init];
+ student.name = @"Name2";
+ student.hobby = @"Football";
+ student.age = 13;
+ NSDictionary *studentDic = [GenericModel getDictionaryByObject:student];
+ 
+ NSLog(@"studentDic:%@",studentDic.description);
+```
+```objc
+gradeDic:{
+    students =     (
+                {
+            age = 15;
+            hobby = BasketBall;
+            name = "student_1";
+        },
+                {
+            age = 14;
+            hobby = Football;
+            name = "student_2";
+        }
+    );
 }
 ```
