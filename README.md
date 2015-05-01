@@ -1,5 +1,5 @@
 # GenericModel
-Objective-C Model和JSON互相转换的简单高效框架,支持model嵌套model。
+Objective-C Model、JSON、NSDictionary互相转换简单高效的轻量级框架,支持model嵌套model。
 
 ## Features
 * GenericModel 支持`Objective-C` `Model`、`NSDictionary`、`JSON`之间互相转换，框架非常简单高效，内部字段反射设置有缓存，用`Objective-C`中的`Protocol`限定`NSArray`，`NSDictionary`等`容器`类的类型，防止容器类型变量类型使用错误，类似`Java`中容器类型的`泛型`。
@@ -9,8 +9,8 @@ Objective-C Model和JSON互相转换的简单高效框架,支持model嵌套model
  
 ## Example
 
-### NSDictionary -> Model
-### 字典类型转换简单Model
+### JSON -> Model
+### JSON类型转简单Model
 ```objc
 //StudentModel.h
 @protocol StudentModel @end
@@ -22,6 +22,43 @@ Objective-C Model和JSON互相转换的简单高效框架,支持model嵌套model
 
 @end
 ```
+```objc
+//Example Code 
+NSString *jsonString = @"{\"name\":\"Name1\", \"hobby\":\"Basketball\", \"age\":14}";
+StudentModel *studentModel = [GenericModel getObjectByJSON:jsonString clazz:[StudentModel class]];
+NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel.hobby, (long)studentModel.age);
+```
+```objc
+//Output
+2015-05-01 18:43:07.998 GenericModel[16634:359368] studentModel:name:Name1, hobby:Basketball, age:14
+````
+### Model --> JSON
+### 简单Model转JSON类型
+```objc
+StudentModel *student_1 = [[StudentModel alloc] init];
+student_1.name = @"student_1";
+student_1.hobby = @"BasketBall";
+student_1.age = 15;
+    
+StudentModel *student_2 = [[StudentModel alloc] init];
+student_2.name = @"student_2";
+student_2.hobby = @"Football";
+student_2.age = 14;
+    
+GradeModel *gradeMode = [[GradeModel alloc] init];
+[gradeMode.students addObject:student_1];
+[gradeMode.students addObject:student_2];
+    
+NSString *resultJSON = [GenericModel getJSONByObject:gradeMode];
+NSLog(@"resultJSON:%@",resultJSON);
+````
+```objc
+//Output
+resultJSON:{"students":[{"name":"student_1","hobby":"BasketBall","age":15},{"name":"student_2","hobby":"Football","age":14}]}
+````
+
+### NSDictionary -> Model
+### 字典类型转换简单Model
 ```objc
 //Example Code 
 NSDictionary *studentDic = @{
@@ -218,7 +255,7 @@ subStudentDic:{
 }
 ```
 
-### NSDictionary --> ((model extended by other model)
+### NSDictionary --> (model extended by other model)
 ### 字典转化成继承与其他model的model
 ```objc
 //Example Code 
