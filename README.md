@@ -13,7 +13,6 @@ Objective-C Model和JSON互相转换的简单高效框架
 ### 字典类型转换简单Model
 ```objc
 //StudentModel.h
-
 @protocol StudentModel @end
 @interface StudentModel : GenericModel
 
@@ -25,7 +24,6 @@ Objective-C Model和JSON互相转换的简单高效框架
 ```
 ```objc
 //Example Code 
-
 NSDictionary *studentDic = @{
                              @"name" : @"Name1",
                              @"hobby": @"Basketball",
@@ -39,7 +37,6 @@ NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel
 ```
 ```objc
 //Output
-
 studentDic:{
     age = 13;
     hobby = Football;
@@ -49,15 +46,55 @@ studentDic:{
 ### Model -> NSDictionary
 ### 简单Model转换成字典
 ```objc
- StudentModel *student = [[StudentModel alloc] init];
- student.name = @"Name2";
- student.hobby = @"Football";
- student.age = 13;
- NSDictionary *studentDic = [GenericModel getDictionaryByObject:student];
+//Example Code 
+StudentModel *student = [[StudentModel alloc] init];
+student.name = @"Name2";
+student.hobby = @"Football";
+student.age = 13;
+NSDictionary *studentDic = [GenericModel getDictionaryByObject:student];
  
- NSLog(@"studentDic:%@",studentDic.description);
+NSLog(@"studentDic:%@",studentDic.description);
 ```
 ```objc
+//Output
+gradeDic:{
+    students =     (
+                {
+            age = 15;
+            hobby = BasketBall;
+            name = "student_1";
+        },
+                {
+            age = 14;
+            hobby = Football;
+            name = "student_2";
+        }
+    );
+}
+```
+### (Model Include NSSArray) -> NSDictionary
+### 带有数组的Model转换成字典
+```objc
+//Example Code 
+StudentModel *student_1 = [[StudentModel alloc] init];
+student_1.name = @"student_1";
+student_1.hobby = @"BasketBall";
+student_1.age = 15;
+    
+StudentModel *student_2 = [[StudentModel alloc] init];
+student_2.name = @"student_2";
+student_2.hobby = @"Football";
+student_2.age = 14;
+    
+GradeModel *gradeMode = [[GradeModel alloc] init];
+[gradeMode.students addObject:student_1];
+[gradeMode.students addObject:student_2];
+    
+NSDictionary *gradeDic = [GenericModel getDictionaryByObject:gradeMode];
+NSLog(@"gradeDic:%@",gradeDic.description);
+```
+```objc
+//Output
 gradeDic:{
     students =     (
                 {
