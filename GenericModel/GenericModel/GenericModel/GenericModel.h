@@ -16,8 +16,18 @@
 + (id)getObjectByDictionary:(NSDictionary *)dic clazz:(Class)clazz;
 
 /**
+ * JSON -> Model
+ */
++ (id)getObjectByJSON:(NSString *)json clazz:(Class)clazz;
+
+/**
  * Model -> NSDictionary
  */
 + (NSDictionary *)getDictionaryByObject:(id)object;
+
+/**
+ * Model -> JSON
+ */
++ (NSString *)getJSONByObject:(id)object;
 
 @end

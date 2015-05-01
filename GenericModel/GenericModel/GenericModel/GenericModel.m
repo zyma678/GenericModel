@@ -57,6 +57,8 @@ BOOL genStringTypeIsSet(NSString *type);
 BOOL genObjectTypeIsSet(id obj);
 /** JSON->NSDictionary */
 NSDictionary *JSONObject(NSString *jsonStr);
+/** NSDictionary->JSON */
+NSString *JSONString(NSDictionary *dic);
 
 /** **************classinfo tools************** */
 static NSMutableDictionary *__classDeclatedCacheMap;
@@ -85,6 +87,14 @@ static NSArray *enumIntFlagArray = NULL;
     return result;
 }
 
++ (id)getObjectByJSON:(NSString *)json clazz:(Class)clazz{
+    NSDictionary *dic = JSONObject(json);
+    if (dic) {
+        return [GenericModel getObjectByDictionary:dic clazz:clazz];
+    }else{
+        return nil;
+    }
+}
 
 + (NSDictionary *)getDictionaryByObject:(id)object{
     Class clazz = [object class];
@@ -93,6 +103,11 @@ static NSArray *enumIntFlagArray = NULL;
         result = genSerializeObject(object, NSStringFromClass(clazz));
     }
     return result;
+}
+
++ (NSString *)getJSONByObject:(id)object{
+    NSDictionary *dicResult = [GenericModel getDictionaryByObject:object];
+    return JSONString(dicResult);
 }
 
 #pragma mark - --------------------classinfo tools--------------------
@@ -389,6 +404,10 @@ NSSet * genDeserializeSet(id obj, NSString *clazz){
 NSDictionary *JSONObject(NSString *jsonStr)
 {
     return [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+}
+
+NSString *JSONString(NSDictionary *dic){
+    return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dic options:kNilOptions error:nil] encoding:NSUTF8StringEncoding];
 }
 
 #pragma mark - 获取类型符号

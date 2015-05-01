@@ -26,6 +26,10 @@
 }
 
 - (void)testGenericModel{
+    /** JSON -> Model */
+    [self jsonToModel];
+    /** Model -> JSON */
+    [self modelToJSON];
     /** NSDictionary -> Model */
     [self simpleDicToModel];
     /** Model -> NSDictionary */
@@ -42,6 +46,33 @@
     [self modelExtendedByOtherModelToDic];
     /** NSDictionary -> (model extended by other model) */
     [self dicTomodelExtendedByOtherModel];
+}
+
+/** JSON -> Model */
+- (void)jsonToModel{
+    NSString *jsonString = @"{\"name\":\"Name1\", \"hobby\":\"Basketball\", \"age\":14}";
+    StudentModel *studentModel = [GenericModel getObjectByJSON:jsonString clazz:[StudentModel class]];
+    NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel.hobby, (long)studentModel.age);
+}
+
+/** Model -> JSON */
+- (void)modelToJSON{
+    StudentModel *student_1 = [[StudentModel alloc] init];
+    student_1.name = @"student_1";
+    student_1.hobby = @"BasketBall";
+    student_1.age = 15;
+    
+    StudentModel *student_2 = [[StudentModel alloc] init];
+    student_2.name = @"student_2";
+    student_2.hobby = @"Football";
+    student_2.age = 14;
+    
+    GradeModel *gradeMode = [[GradeModel alloc] init];
+    [gradeMode.students addObject:student_1];
+    [gradeMode.students addObject:student_2];
+    
+    NSString *resultJSON = [GenericModel getJSONByObject:gradeMode];
+    NSLog(@"resultJSON:%@",resultJSON);
 }
 
 /** NSDictionary -> Model */
