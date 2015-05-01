@@ -114,6 +114,36 @@ gradeDic:{
 ### 字典转换成带有数组的Model
 ```objc
 //Example Code 
+NSDictionary *gradeDic2 = @{
+                            @"students" : @[
+                                    @{
+                                        @"name" : @"Name1",
+                                        @"hobby": @"Football",
+                                        @"age"  : @(13)},
+                                    @{
+                                        @"name" : @"Name2",
+                                        @"hobby": @"Basketball",
+                                        @"age"  : @(14)},
+                                    @{
+                                        @"name" : @"Name3",
+                                        @"hobby": @"Basketball",
+                                        @"age"  : @(15)}]
+                            };
+GradeModel *gradeMode2 = [GenericModel getObjectByDictionary:gradeDic2 clazz:[GradeModel class]];
+for (StudentModel *mode in gradeMode2.students) {
+    NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",mode.name, mode.hobby, (long)mode.age);
+}
+```
+```objc
+//Output
+2015-05-01 17:29:37.673 GenericModel[14890:282213] studentModel:name:Name1, hobby:Football, age:13
+2015-05-01 17:29:37.673 GenericModel[14890:282213] studentModel:name:Name2, hobby:Basketball, age:14
+2015-05-01 17:29:37.673 GenericModel[14890:282213] studentModel:name:Name3, hobby:Basketball, age:15
+```
+### (Model Include NSDictionary) --> NSDictionary
+### 带有字典的复杂model转化成字典
+```objc
+//Example Code 
 FriendsModel *friends = [[FriendsModel alloc] init];
 NSDictionary *tempFriendsDic = @{
                                  @"friend1" : @{
@@ -155,4 +185,58 @@ friendsDic:{
     };
 }
 
+```
+### ((model extended by other model) -> NSDictionary
+### 继承与其他model的model转化成字典
+```objc
+#import "StudentModel.h"
+
+@interface SubStudentModel : StudentModel
+
+@property (nonatomic, copy) NSString *birthName;
+
+@end
+
+```
+```objc
+//Example Code 
+SubStudentModel *subStudentModel = [[SubStudentModel alloc] init];
+subStudentModel.name = @"student_1";
+subStudentModel.hobby = @"BasketBall";
+subStudentModel.age = 15;
+subStudentModel.birthName = @"birthName1";
+NSDictionary *subStudentDic = [GenericModel getDictionaryByObject:subStudentModel];
+NSLog(@"subStudentDic:%@",subStudentDic);
+```
+```objc
+//Output
+subStudentDic:{
+    age = 15;
+    birthName = birthName1;
+    hobby = BasketBall;
+    name = "student_1";
+}
+```
+
+### NSDictionary --> ((model extended by other model)
+### 字典转化成继承与其他model的model
+```objc
+//Example Code 
+NSDictionary *subStudentDic = @{
+                             @"name" : @"Name1",
+                             @"hobby": @"Basketball",
+                             @"age"  : @(25),
+                             @"birthName" : @"birthName1"};
+    
+SubStudentModel *subStudentModel = [GenericModel getObjectByDictionary:subStudentDic
+                                                                 clazz:[SubStudentModel class]];
+NSLog(@"studentModel:name:%@, hobby:%@, age:%ld , birthName:%@",
+      subStudentModel.name,
+      subStudentModel.hobby,
+      (long)subStudentModel.age,
+      subStudentModel.birthName);
+```
+```objc
+//Output
+2015-05-01 17:29:37.672 GenericModel[14890:282213] studentModel:name:Name1, hobby:Basketball, age:25
 ```
