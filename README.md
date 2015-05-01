@@ -11,7 +11,6 @@ Objective-C Model和JSON互相转换的简单高效框架
 
 * `NSDictionary -> Model`
 ```
-
 /****************** StudentModel.h ***************/
 
 @protocol StudentModel @end
@@ -22,9 +21,8 @@ Objective-C Model和JSON互相转换的简单高效框架
 @property (nonatomic, assign) NSInteger age;
 
 @end
-
-/***********************************************/
-
+```
+```
 /***************** Example Code ****************/
 
 NSDictionary *studentDic = @{
@@ -37,7 +35,9 @@ StudentModel *studentModel = [GenericModel
                               clazz:[StudentModel class]];
                               
 /***********************************************/
+```
 
+```
 /****************   Output    *******************/
 
 studentDic:{
