@@ -10,7 +10,7 @@ Objective-C Model、JSON、NSDictionary互相转换简单高效的轻量级框�
 ## Example
 
 ### JSON -> Model
-### JSON类型转简单Model
+* JSON类型转简单Model
 ```objc
 //StudentModel.h
 @protocol StudentModel @end
@@ -32,8 +32,8 @@ NSLog(@"studentModel:name:%@, hobby:%@, age:%ld",studentModel.name, studentModel
 //Output
 2015-05-01 18:43:07.998 GenericModel[16634:359368] studentModel:name:Name1, hobby:Basketball, age:14
 ````
-### Model --> JSON
-### 简单Model转JSON类型
+### Model -> JSON
+* 简单Model转JSON类型
 ```objc
 StudentModel *student_1 = [[StudentModel alloc] init];
 student_1.name = @"student_1";
@@ -58,7 +58,7 @@ resultJSON:{"students":[{"name":"student_1","hobby":"BasketBall","age":15},{"nam
 ````
 
 ### NSDictionary -> Model
-### 字典类型转换简单Model
+* 字典类型转换简单Model
 ```objc
 //Example Code 
 NSDictionary *studentDic = @{
@@ -81,7 +81,7 @@ studentDic:{
 }
 ```
 ### Model -> NSDictionary
-### 简单Model转换成字典
+* 简单Model转换成字典
 ```objc
 //Example Code 
 StudentModel *student = [[StudentModel alloc] init];
@@ -110,7 +110,7 @@ gradeDic:{
 }
 ```
 ### (Model Include NSSArray) -> NSDictionary
-### 带有数组的Model转换成字典
+* 带有数组的Model转换成字典
 ```objc
 //Example Code 
 StudentModel *student_1 = [[StudentModel alloc] init];
@@ -148,7 +148,7 @@ gradeDic:{
 }
 ```
 ### NSDictionary --> (Model Include NSSArray)
-### 字典转换成带有数组的Model
+* 字典转换成带有数组的Model
 ```objc
 //Example Code 
 NSDictionary *gradeDic2 = @{
@@ -178,7 +178,7 @@ for (StudentModel *mode in gradeMode2.students) {
 2015-05-01 17:29:37.673 GenericModel[14890:282213] studentModel:name:Name3, hobby:Basketball, age:15
 ```
 ### (Model Include NSDictionary) --> NSDictionary
-### 带有字典的复杂model转化成字典
+* 带有字典的复杂model转化成字典
 ```objc
 //Example Code 
 FriendsModel *friends = [[FriendsModel alloc] init];
@@ -224,7 +224,7 @@ friendsDic:{
 
 ```
 ### ((model extended by other model) -> NSDictionary
-### 继承与其他model的model转化成字典
+* 继承与其他model的model转化成字典
 ```objc
 #import "StudentModel.h"
 
@@ -256,7 +256,7 @@ subStudentDic:{
 ```
 
 ### NSDictionary --> (model extended by other model)
-### 字典转化成继承与其他model的model
+* 字典转化成继承与其他model的model
 ```objc
 //Example Code 
 NSDictionary *subStudentDic = @{
