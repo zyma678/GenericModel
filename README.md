@@ -110,3 +110,49 @@ gradeDic:{
     );
 }
 ```
+### NSDictionary --> (Model Include NSSArray)
+### 字典转换成带有数组的Model
+```objc
+//Example Code 
+FriendsModel *friends = [[FriendsModel alloc] init];
+NSDictionary *tempFriendsDic = @{
+                                 @"friend1" : @{
+                                         @"name" : @"Name1",
+                                         @"hobby": @"Football",
+                                         @"age"  : @(13)},
+                                 @"friend2" : @{
+                                         @"name" : @"Name2",
+                                         @"hobby": @"Basketball",
+                                         @"age"  : @(14)},
+                                 @"friend3" : @{
+                                         @"name" : @"Name3",
+                                         @"hobby": @"Basketball",
+                                         @"age"  : @(15)}
+                                 };
+friends.friendDic = (NSMutableDictionary<StudentModel> *)tempFriendsDic;
+NSDictionary *friendsDic = [GenericModel getDictionaryByObject:friends];
+NSLog(@"friendsDic:%@",friendsDic);
+```
+```objc
+//Output
+friendsDic:{
+    friendDic =     {
+        friend1 =         {
+            age = 13;
+            hobby = Football;
+            name = Name1;
+        };
+        friend2 =         {
+            age = 14;
+            hobby = Basketball;
+            name = Name2;
+        };
+        friend3 =         {
+            age = 15;
+            hobby = Basketball;
+            name = Name3;
+        };
+    };
+}
+
+```
